@@ -9,20 +9,25 @@
 #import "FirstViewController.h"
 
 @interface FirstViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *firstNameField;
+@property (weak, nonatomic) IBOutlet UITextField *lastNameField;
+@property (weak, nonatomic) IBOutlet UITextField *year;
+@property (weak, nonatomic) IBOutlet UILabel *outputLabel;
 
 @end
 
 @implementation FirstViewController
-
-- (void)viewDidLoad {
-  [super viewDidLoad];
-  // Do any additional setup after loading the view, typically from a nib.
+- (IBAction)didTapButton:(id)sender {
+  NSString *first = _firstNameField.text;
+  NSString *last = _lastNameField.text;
+  NSString *yearTick = [self classTickFromYear:_year.text];
+  
+  NSString *outputString = [NSString stringWithFormat:@"%@ %@ %@", first, last, yearTick];
+  _outputLabel.text = outputString;
 }
 
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
+- (NSString *)classTickFromYear:(NSString *)year {
+  return [NSString stringWithFormat:@"'%@", [year substringFromIndex:2]];
 }
 
 
